@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Set up / tear down namespace and veth interfaces
+
+IP=/usr/sbin/ip
+
+case $1 in
+    start)
+        $IP netns add xxNAMESPACExx
+        $IP link add dev xxINTERFACExx type veth peer name xxINTERFACExx netns xxNAMESPACExx
+        $IP netns exec xxNAMESPACExx $IP addr add 127.0.0.1/8 scope host dev lo
+        $IP netns exec xxNAMESPACExx $IP addr add ::1/128 scope host dev lo
+        ;;
+    stop)
+        $IP link del dev xxINTERFACExx
+        $IP netns del xxNAMESPACExx
+        ;;
+esac
+

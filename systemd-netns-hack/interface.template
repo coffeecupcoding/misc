@@ -1,0 +1,18 @@
+
+allow-hotplug xxINTERFACExx
+
+iface xxINTERFACExx inet manual
+    up ip link set $IFACE address xxMACADDRxx
+    up ip link set $IFACE up
+    up ip netns exec xxNAMESPACExx ip link set $IFACE up
+    up sleep 1
+    up ip netns exec xxNAMESPACExx ip addr add xxIPADDRxx dev $IFACE
+    up brctl addif xxBRIDGExx $IFACE
+
+#    up ip netns exec xxNAMESPACExx ip route add default via xxROUTERxx
+
+iface xxINTERFACExx inet6 manual
+    up ip netns exec xxNAMESPACExx ip addr add xxIP6ADDRxx dev $IFACE
+
+#    up ip netns exec xxNAMESPACExx ip route add 2000::/3 via xxV6ROUTERxx
+

@@ -1,0 +1,14 @@
+[Unit]
+Description=Namespace manager for %I
+StopWhenUnneeded=true
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+
+# May be multiple interfaces, etc. and we have no configuration mechanism
+# So just run a script
+ExecStart=/etc/network/namespaces/%i start
+ExecStop=/etc/network/namespaces/%i stop
+
