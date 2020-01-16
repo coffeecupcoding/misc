@@ -10,6 +10,7 @@ case $1 in
         $IP link add dev xxINTERFACExx type veth peer name xxINTERFACExx netns xxNAMESPACExx
         $IP netns exec xxNAMESPACExx $IP addr add 127.0.0.1/8 scope host dev lo
         $IP netns exec xxNAMESPACExx $IP addr add ::1/128 scope host dev lo
+        $IP netns exec xxNAMESPACExx $IP link set lo up
         ;;
     stop)
         $IP link del dev xxINTERFACExx
