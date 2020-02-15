@@ -2,7 +2,6 @@
 allow-hotplug xxINTERFACExx
 
 iface xxINTERFACExx inet manual
-    up ip link set $IFACE address xxMACADDRxx
     up ip link set $IFACE up
     up ip netns exec xxNAMESPACExx ip link set $IFACE up
     up sleep 1
